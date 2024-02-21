@@ -1,5 +1,8 @@
-
+.vscode
 .DS_Store
-libdragon/
-*.z64
+
 build/
+filesystem/
+
+*.log
+*.z64
