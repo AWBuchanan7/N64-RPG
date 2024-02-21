@@ -1,4 +1,4 @@
-all: breadcodes.z64
+all: n64rpg.z64
 .PHONY: all
 
 BUILD_DIR = build
@@ -14,47 +14,43 @@ SPRITE_MANIFEST_TXT := $(PNG_DIR)/manifest.txt
 MKSPRITE := mksprite
 REDIRECT_STDOUT := >/dev/null
 
-breadcodes.z64: N64_ROM_TITLE = "breadcodes"
-breadcodes.z64: $(BUILD_DIR)/breadcodes.dfs
+n64rpg.z64: N64_ROM_TITLE = "n64rpg"
+n64rpg.z64: $(BUILD_DIR)/n64rpg.dfs
 
-$(BUILD_DIR)/breadcodes.dfs: $(wildcard filesystem/*)
-$(BUILD_DIR)/breadcodes.elf: $(OBJS)
+$(BUILD_DIR)/n64rpg.dfs: $(wildcard filesystem/*)
+$(BUILD_DIR)/n64rpg.elf: $(OBJS)
 
 clean:
-	rm -rf $(BUILD_DIR) *.z64
+	rm -rf $(BUILD_DIR) $(SPRITE_DIR) *.z64
 .PHONY: clean
 
 assets:
-	mksprite 16 2 2 assets/venusaur.png filesystem/venusaur.sprite
-	mksprite 16 9 2 assets/aang.png filesystem/aang.sprite
-	mksprite 16 3 4 assets/player.png filesystem/player.sprite
-	mksprite 16 3 4 assets/npc_ghost.png filesystem/npc_ghost.sprite
-	mksprite 16 9 2 assets/peach.png filesystem/peach.sprite
-	mksprite 16 9 2 assets/yugi.png filesystem/yugi.sprite
-	mksprite 16 9 1 assets/rick.png filesystem/rick.sprite
-	mksprite 16 1 1 assets/cursor.png filesystem/cursor.sprite
-	mksprite 16 8 133 assets/tileset.png filesystem/tileset.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_0.png filesystem/tileset_0.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_1.png filesystem/tileset_1.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_2.png filesystem/tileset_2.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_3.png filesystem/tileset_3.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_4.png filesystem/tileset_4.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_5.png filesystem/tileset_5.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_6.png filesystem/tileset_6.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_7.png filesystem/tileset_7.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_8.png filesystem/tileset_8.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_9.png filesystem/tileset_9.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_10.png filesystem/tileset_10.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_11.png filesystem/tileset_11.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_12.png filesystem/tileset_12.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_13.png filesystem/tileset_13.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_14.png filesystem/tileset_14.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_15.png filesystem/tileset_15.sprite
-	mksprite 16 8 8 tileset_generated_parts/tileset_16.png filesystem/tileset_16.sprite
+	mkdir ./filesystem
+	mksprite --verbose --output filesystem/ assets/venusaur.png
+	mksprite --verbose --output filesystem/ assets/aang.png
+	mksprite --verbose --output filesystem/ assets/player.png
+	mksprite --verbose --output filesystem/ assets/npc_ghost.png
+	mksprite --verbose --output filesystem/ assets/peach.png
+	mksprite --verbose --output filesystem/ assets/yugi.png
+	mksprite --verbose --output filesystem/ assets/rick.png
+	mksprite --verbose --output filesystem/ assets/cursor.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_0.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_1.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_2.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_3.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_4.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_5.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_6.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_7.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_8.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_9.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_10.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_11.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_12.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_13.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_14.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_15.png
+	mksprite --verbose --output filesystem/ tileset_generated_parts/tileset_16.png
 .PHONY: assets
-
-libdragon-tools:
-	cd libdragon/ && make tools install
-.PHONY: tools
 
 -include $(DEPS)

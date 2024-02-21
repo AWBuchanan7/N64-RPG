@@ -1,5 +1,7 @@
 # RPG Engine for the Nintendo 64
 
+This is my personal fork of [breadbored](https://github.com/breadbored)'s project [N64-RPG](https://github.com/breadbored/N64-RPG). It has been restructured for a simple, native Linux development environment and to my personal preferences. This fork is intended exclusively as a learning experience for me and I offer no real support for it.
+
 ## About
 
 This unnamed project is an attempt to write all the parts of an RPG from scratch. Below is the list of features currently being written:
@@ -21,44 +23,22 @@ This unnamed project is an attempt to write all the parts of an RPG from scratch
 
 ## Setup
 
-If you are on Windows, you will need to first set up WSL to get a linux environment in Windows
+This project assumes you are running Linux and have installed [libdragon](https://github.com/DragonMinded/libdragon).
 
-You will need to install the following (if you are using WSL, you will need to install inside that environment):
+It has been exclusively tested on `Debian 12.5` and `Ubuntu 23.10`, with `Libdragon 13.2.0`. Builds have been tested on an NTSC Nintendo 64 with an `Everdrive X7` running `OS 3.07`.
 
-- Docker
-- NodeJS >v18
-- NPM
+To build the N64 rom file `n64rpg.z64` run:
 
-To get libdragon setup, you will need to run the following:
+- `make assets`
+- `make`
 
-- Make sure the Docker daemon is running
-- `npm i libdragon -g`
-- `cd /path/to/this/project`
-- `libdragon init`
+## Editing the Map with Tiled
 
-To build the project:
+The map was generated using [Tiled](https://thorbjorn.itch.io/tiled?download). You can find the project file at `map/n64-rpg.tiled-project`. I export as a CSV called `overworld.csv` and it will generate a CSV for each layer.
 
-- `libdragon make assets`
-- `libdragon make`
+To build the map, run the included tool with `python3 tools/makemap.py` to generate the map file.
 
-This will produce an N64 ROM  called `breacodes.z64`
-
-![Screenshot](screenshot.png)
-
-## Playing
-
-### The best way to play is on a real Nintendo 64 via a flashcart
-
-However if you must use an emulator, you must use an accurate emulator such as Ares. Common emulators are ***not*** accurate. They are typically optimized to run official games at a good speed, but are not hardware accurate. `libdragon` is a different from the official SDK, and most emulators cover emulation for the official SDK only, meaning it requires hardware accuracy or specially built support.
-
-
-## Editing the map
-
-To make the map, I used software called [Tiled](https://thorbjorn.itch.io/tiled?download). You can find the project file at `map/n64-rpg.tiled-project`. I export as a CSV called `overworld.csv` and it will generate a CSV for each layer. 
-
-To build the mpa, run the included tool with `python3 tools/makemap.py` to generate the map file.
-
-Important notes:
+### Important notes
 
 I work only in the positive area (0,0) and higher. Do not add any tiles in the negative coordinates or it will shift the entire map.
 
